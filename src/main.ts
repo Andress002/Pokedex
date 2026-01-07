@@ -4,14 +4,19 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix('api/v2'); //es un método que agrega un prefijo URL a todas las rutas de tu aplicación
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
-
-  app.setGlobalPrefix('api/v2'); //es un método que agrega un prefijo URL a todas las rutas de tu aplicación
 
   await app.listen(process.env.PORT ?? 3000);
 }
