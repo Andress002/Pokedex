@@ -82,7 +82,7 @@ export class PokemonService {
       await pokemon.updateOne(updatePokemonDto);
 
       return { ...pokemon.toJSON(), ...updatePokemonDto } as Pokemon;
-    } catch (error) {
+    } catch (error: unknown) {
       this.handleExceptions(error);
     }
   }

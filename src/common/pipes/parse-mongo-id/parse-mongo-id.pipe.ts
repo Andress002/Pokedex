@@ -9,6 +9,7 @@ import { isValidObjectId } from 'mongoose';
 @Injectable()
 export class ParseMongoIdPipe implements PipeTransform {
   transform(value: string, metadata: ArgumentMetadata) {
+    //value el valor real que viene del request
     if (!isValidObjectId(value)) {
       throw new BadRequestException(`${value} is not a valid MongoID`);
     }

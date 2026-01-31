@@ -10,8 +10,11 @@ export class AxiosAdapter implements HttpAdapter {
     try {
       const { data } = await this.axios.get<T>(url);
       return data;
-    } catch (error) {
-      throw new Error('This is an error - Check los', error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('This is an error - Check los');
     }
   }
 }
